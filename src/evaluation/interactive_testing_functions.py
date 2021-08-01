@@ -129,12 +129,14 @@ def conditional_generation(selected_conditions, gen_sent_len, num_sent_gen, word
     selected_topic_idx = []
     selected_word_idx = []
     for x in selected_conditions:
+	print('X :: ', x)
         if isinstance(x, int):
             selected_topic_idx.append(x)
         else:
             if x not in word_d2_idx:
                 print('Warning: Ignore the word '+x+' because it is too rare')
                 continue
+	    print('HERE SLECTED_WORD_IDX :: \n', selected_word_idx)
             selected_word_idx.append(word_d2_idx[x])
     selected_topic_idx = torch.tensor(np.sort(selected_topic_idx), dtype=torch.long, device = device_conditional)
     selected_word_idx = torch.tensor(selected_word_idx, dtype=torch.long, device = device_conditional)
